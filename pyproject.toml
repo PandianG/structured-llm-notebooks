@@ -25,6 +25,7 @@ dependencies = [
     # --- Core LLM Libraries ---
     "dspy>=2.6.0",
     "outlines>=0.1.0",
+    "outlines[llguidance]>=0.1.0",
     "instructor>=1.7.0",
 
     # --- LLM Provider SDKs ---
@@ -40,6 +41,7 @@ dependencies = [
     "jupyterlab>=4.3.0",
     "ipywidgets>=8.1.0",
     "gradio>=5.0.0",
+    "streamlit>=1.40.0",
     "matplotlib>=3.9.0",
 
     # --- Local Model Inference ---

@@ -1,5 +1,5 @@
 # Makefile — Shortcuts for Structured LLM Notebooks
-.PHONY: help install sync ollama-setup notebooks nb fmt lint typecheck test clean cost-report
+.PHONY: help install sync ollama-setup notebooks nb streamlit fmt lint typecheck test clean cost-report
 
 help: ## Show this help message
 	@echo "Structured LLM Notebooks — Available Commands"
@@ -20,6 +20,9 @@ notebooks: ## Start Jupyter Lab
 
 nb: ## Alias for notebooks
 	$(MAKE) notebooks
+
+streamlit: ## Launch the interactive Structured LLM Lab (Streamlit)
+	uv run streamlit run streamlit_app/Home.py
 
 fmt: ## Format code with ruff
 	uv run ruff format src/ notebooks/

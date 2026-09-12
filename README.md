@@ -116,6 +116,20 @@ make notebooks
 
 Then open [http://localhost:8888](http://localhost:8888) and navigate to `notebooks/01_instructor/`.
 
+### 🧪 Interactive Demos (Streamlit)
+
+Prefer clicking to reading? Launch the **Structured LLM Lab** — a multi-page Streamlit app
+with live, hands-on demos: raw prompting vs Instructor, raw generation vs Outlines,
+adherence benchmarks on real data, streaming UIs, and a head-to-head comparison.
+
+```bash
+make streamlit    # then open http://localhost:8501
+```
+
+Pages: `1❌ Without Instructor` → `2✅ With Instructor` → `3❌ Without Outlines` →
+`4✅ With Outlines` → `5⚖️ Head-to-Head`. Keep `USE_SMALL_MODEL=true` for cheap runs.
+
+
 ### Makefile Commands
 
 | Command | Description |
@@ -124,6 +138,7 @@ Then open [http://localhost:8888](http://localhost:8888) and navigate to `notebo
 | `make sync` | 🔄 Sync uv dependencies |
 | `make ollama-setup` | 🦙 Pull local Ollama models |
 | `make notebooks` | 📓 Start Jupyter Lab |
+| `make streamlit` | 🧪 Launch the interactive Structured LLM Lab |
 | `make fmt` | ✨ Format code with ruff |
 | `make lint` | 🔍 Lint code with ruff |
 | `make typecheck` | 🏷️ Type check with mypy |

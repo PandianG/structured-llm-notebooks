@@ -87,3 +87,10 @@ logs/
 # Synthetic datasets are checked in (a global gitignore commonly ignores data/)
 !data/
 !data/*.jsonl
+
+# DSPy notebooks are kept locally but not published
+notebooks/06_dspy/
+
+# Notebook-generated sample images (regenerated on run)
+sample_invoice.png
+sample_chart.png
