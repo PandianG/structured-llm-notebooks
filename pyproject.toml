@@ -1,0 +1,105 @@
+[project]
+name = "structured-llm-notebooks"
+version = "0.1.0"
+description = "Deep-feature implementation notebooks for structured LLM programming — Instructor, Outlines, and DSPy"
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+license = {text = "MIT"}
+authors = [
+    {name = "KrishAI Technologies"}
+]
+keywords = ["llm", "dspy", "outlines", "instructor", "structured-output", "prompt-engineering"]
+
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    # --- Core LLM Libraries ---
+    "dspy>=2.6.0",
+    "outlines>=0.1.0",
+    "instructor>=1.7.0",
+
+    # --- LLM Provider SDKs ---
+    "openai>=1.60.0",
+    "anthropic>=0.42.0",
+    "litellm>=1.57.0",
+
+    # --- Data & Validation ---
+    "pydantic>=2.10.0",
+    "numpy>=1.26.0",
+
+    # --- Jupyter & UI ---
+    "jupyterlab>=4.3.0",
+    "ipywidgets>=8.1.0",
+    "gradio>=5.0.0",
+    "matplotlib>=3.9.0",
+
+    # --- Local Model Inference ---
+    "transformers>=4.48.0",
+    "torch>=2.5.0",
+    "accelerate>=1.0.0",
+    "bitsandbytes>=0.45.0",
+    "peft>=0.14.0",
+    "trl>=0.13.0",
+    "sentencepiece>=0.2.0",
+    "protobuf>=5.0.0",
+
+    # --- Optional: Efficient Fine-tuning ---
+    "unsloth>=2025.1.0; platform_machine == 'x86_64'",
+
+    # --- Utilities ---
+    "python-dotenv>=1.0.0",
+    "tenacity>=9.0.0",
+    "tqdm>=4.66.0",
+    "pyyaml>=6.0.0",
+    "requests>=2.32.0",
+    "httpx>=0.27.0",
+    "pillow>=11.0.0",
+    "rich>=13.9.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.8.0",
+    "mypy>=1.14.0",
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "N", "UP", "B", "C4", "SIM"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+
+[tool.uv]
+managed = true
+package = true
+
+[tool.uv.pip]
+extra-index-url = [
+    "https://download.pytorch.org/whl/cpu",
+]
