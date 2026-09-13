@@ -116,18 +116,43 @@ make notebooks
 
 Then open [http://localhost:8888](http://localhost:8888) and navigate to `notebooks/01_instructor/`.
 
-### 🧪 Interactive Demos (Streamlit)
+### 🧪 Structured LLM Lab (Streamlit App)
 
 Prefer clicking to reading? Launch the **Structured LLM Lab** — a multi-page Streamlit app
 with live, hands-on demos: raw prompting vs Instructor, raw generation vs Outlines,
-adherence benchmarks on real data, streaming UIs, and a head-to-head comparison.
+adherence benchmarks on real data, mode switching, streaming UIs, and a head-to-head
+comparison of all three libraries.
+
+**Start it with either:**
 
 ```bash
-make streamlit    # then open http://localhost:8501
+make streamlit
+# or, without the Makefile:
+uv run streamlit run streamlit_app/Home.py
 ```
 
-Pages: `1❌ Without Instructor` → `2✅ With Instructor` → `3❌ Without Outlines` →
-`4✅ With Outlines` → `5⚖️ Head-to-Head`. Keep `USE_SMALL_MODEL=true` for cheap runs.
+Then open **http://localhost:8501** in your browser.
+
+**Requirements:** the app calls real models, so you need at least one provider key in
+`.env` (see [API Keys & Providers](#-api-keys--providers)). No OpenAI key? Set
+`LLM_PROVIDER=gemini` or `LLM_PROVIDER=groq` — both have free tiers, and the sidebar
+shows which keys are connected and which provider is active. Keep `USE_SMALL_MODEL=true`
+in `.env` for cheap runs.
+
+**Pages** (use the sidebar to navigate):
+
+| Page | What it demos |
+|------|---------------|
+| `1❌ Without Instructor` | Raw prompting failure modes — unparseable JSON, no retries, adherence benchmark |
+| `2✅ With Instructor` | One-line patching, validators, streaming partial objects, provider switcher (OpenAI/Anthropic/Gemini/Groq) |
+| `3🚀 Instructor Extras` | `create_iterable`, `instructor.Maybe`, `create_with_completion`, response-modes laboratory |
+| `4❌ Without Outlines` | Why raw generation breaks formats — phone numbers, sentiment labels, JSON |
+| `5✅ With Outlines` | Rerun Page 4's benchmarks with guarantees; regex constraints, CFG code generation |
+| `6🚀 Outlines Extras` | Built-in format masks, regex DSL, batch generation, provably-valid programs |
+| `7⚖️ Head-to-Head` | Same input three ways — raw prompting vs Instructor vs Outlines, side by side |
+
+The sidebar also lets you tune the benchmark sample size and temperature for the raw
+demos. Changes to `.env` require a browser refresh (the app reads it at startup).
 
 
 ### Makefile Commands
