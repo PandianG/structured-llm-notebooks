@@ -28,7 +28,7 @@ constraint-style tasks — formats, enums, and code.
 
 settings = ui.render_sidebar()
 client = ui.get_openai_client()
-model_name = config.get_openai_model()
+model_name = config.get_model()
 
 # ---------------------------------------------------------------------------
 # Demo A — raw "regex" task

@@ -65,7 +65,7 @@ structured-llm-notebooks/
 │   └── 06_dspy/                   # 6 notebooks
 │
 ├── 🧰 src/                        # Shared Python utilities
-│   ├── config.py                  # Unified LM config (OpenAI/Anthropic/Ollama)
+│   ├── config.py                  # Unified LM config (OpenAI/Anthropic/Gemini/Groq/Ollama)
 │   ├── cost_tracker.py            # Per-notebook cost estimates
 │   ├── datasets.py                # Synthetic generators (zero API cost)
 │   └── metrics.py                 # Evaluation metrics
@@ -155,6 +155,7 @@ Every notebook includes a **cost estimate cell**. You control costs via `.env`:
 |------|---------|------------------|-------|
 | 🏎️ **Premium** (GPT-4o) | Default | ~$30-50 | Fastest |
 | 💎 **Cheap** (GPT-4o-mini) | `USE_SMALL_MODEL=true` | ~$3-8 | Fast |
+| 🆓 **Free API** (Gemini / Groq) | `LLM_PROVIDER=gemini` or `=groq` | **$0** (free tier) | Very fast |
 | 🆓 **Free** (Local) | `USE_OLLAMA=true` | **$0** | CPU/GPU |
 
 ### Cost-Saving Tips
@@ -302,12 +303,44 @@ Priority 3: 🚀 DSPy        → For complex multi-stage pipelines needing optim
 
 ---
 
-## 🔑 API Keys Required
+## 🔑 API Keys & Providers
 
-| Service | Key | Required For | Get It At |
-|---------|-----|--------------|-----------|
-| OpenAI | `OPENAI_API_KEY` | Most notebooks (unless using Ollama) | [platform.openai.com](https://platform.openai.com) |
-| Anthropic | `ANTHROPIC_API_KEY` | Claude notebooks | [console.anthropic.com](https://console.anthropic.com) |
+**No paid OpenAI key? No problem.** Every notebook and the Streamlit app support multiple
+providers via one setting in `.env` — pick the one you have a key for:
+
+| Provider | Setting | Default Model | Cost | Get a key at |
+|----------|---------|---------------|------|--------------|
+| OpenAI | `LLM_PROVIDER=openai` | `gpt-4o` | Paid | [platform.openai.com](https://platform.openai.com) |
+| Google Gemini | `LLM_PROVIDER=gemini` | `gemini-3.7-flash` | **Free tier** | [aistudio.google.com/apikey](https://aistudio.google.com/apikey) |
+| Groq | `LLM_PROVIDER=groq` | `openai/gpt-oss-120b` | **Free tier** | [console.groq.com/keys](https://console.groq.com/keys) |
+| Anthropic | `LLM_PROVIDER=anthropic` | `claude-opus-4-6` | Paid | [console.anthropic.com](https://console.anthropic.com) |
+
+```bash
+# .env — minimum viable setup for a free run
+LLM_PROVIDER=gemini          # or: groq
+GEMINI_API_KEY=your-key      # or: GROQ_API_KEY
+```
+
+Provider notes:
+
+- **Gemini** — defaults to `gemini-3.7-flash` (launched Aug 13, 2026; free tier in AI Studio).
+  `gemini-3.8-flash` (Sept 2, 2026, same pricing, stronger coding/agentic performance) is
+  available too — set `GEMINI_MODEL=gemini-3.8-flash` to try it.
+- **Groq** — defaults to `openai/gpt-oss-120b`: it supports native structured outputs
+  (response schemas), which Instructor and Outlines rely on. Note Groq retired
+  `llama-3.3-70b-versatile` from the free tier in Aug 2026, and Llama has no native
+  schema support anyway — if you self-host or use enterprise Groq, expect prompt-only
+  constraint guarantees there.
+- **Instructor** — Gemini uses native structured outputs (`GENAI_STRUCTURED_OUTPUTS`);
+  Groq works via `from_groq` (function-calling mode).
+- **DSPy** — routes through `dspy.LM`/`litellm` (`gemini/…` or `groq/…` prefixes); no
+  extra setup.
+- **Outlines** — uses each provider's OpenAI-compatible endpoint. Hard token-level
+  guarantees require the endpoint to honor structured outputs (OpenAI and Groq's
+  gpt-oss do). For absolute guarantees, use a local model
+  (`outlines.from_transformers`) as the notebooks show.
+- **Vision notebook** (2.4) needs a vision-capable model — use `openai` or `gemini`.
+- You can also override per call in code: `get_instructor_client("gemini")`, `get_model("groq")`, etc.
 
 ---
 

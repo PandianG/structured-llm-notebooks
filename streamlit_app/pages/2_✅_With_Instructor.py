@@ -25,7 +25,7 @@ result **validates as a Pydantic object** before your code ever sees it.
 )
 
 settings = ui.render_sidebar()
-model_name = config.get_openai_model()
+model_name = config.get_model()
 
 # ---------------------------------------------------------------------------
 # Demo A — the one-line difference
@@ -40,7 +40,7 @@ sample_invoice = data.load_invoices(1)[0]
 text = st.text_area("Invoice text", value=sample_invoice["raw_text"], height=100)
 
 if st.button("🚀 Extract with Instructor", type="primary"):
-    client = ui.get_instructor("openai")
+    client = ui.get_instructor()
     ui.show_code(
         "The exact code that runs",
         f"""from pydantic import BaseModel, Field
@@ -68,6 +68,7 @@ invoice = client.chat.completions.create(
                 model=model_name,
                 response_model=models.Invoice,
                 messages=[{"role": "user", "content": f"Extract invoice: {text}"}],
+                max_retries=config.INSTRUCTOR_MAX_RETRIES,
             )
     except Exception as e:  # noqa: BLE001
         ui.api_error(e)
@@ -99,7 +100,7 @@ person_text = st.text_input(
 )
 
 if st.button("🛠️ Extract Person"):
-    client = ui.get_instructor("openai")
+    client = ui.get_instructor()
     retries_seen = []
     try:
         with st.spinner("Extracting (may retry)…"):
@@ -147,7 +148,7 @@ ui.section(
 )
 
 if st.button("📡 Stream a Person"):
-    client = ui.get_instructor("openai")
+    client = ui.get_instructor()
 
     placeholder = st.empty()
     start = time.time()
@@ -177,10 +178,10 @@ ui.section(
     "extraction on two providers and compare the structured output.",
 )
 
-provider = st.radio("Provider", ["openai", "anthropic"], horizontal=True)
+provider = st.radio("Provider", ["openai", "anthropic", "gemini", "groq"], horizontal=True)
 if st.button("🌐 Extract with " + provider):
     client = ui.get_instructor(provider)
-    use_model = model_name if provider == "openai" else config.get_anthropic_model()
+    use_model = config.get_model(provider)
     try:
         with st.spinner(f"Calling {provider}…"):
             kwargs = {}
@@ -190,6 +191,7 @@ if st.button("🌐 Extract with " + provider):
                 model=use_model,
                 response_model=models.Person,
                 messages=[{"role": "user", "content": "Alice, 30, lives in New York"}],
+                max_retries=config.INSTRUCTOR_MAX_RETRIES,
                 **kwargs,
             )
     except Exception as e:  # noqa: BLE001

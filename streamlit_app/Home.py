@@ -44,11 +44,15 @@ Page 7 puts all three working pipelines **head-to-head on the same input**.
 ui.section(
     "Your environment",
     f"""
+- Active provider (`LLM_PROVIDER`): `{config.get_active_provider()}`
 - OpenAI model: `{config.get_openai_model()}`
 - Anthropic model: `{config.get_anthropic_model()}`
+- Gemini model: `{config.get_gemini_model()}` (free tier)
+- Groq model: `{config.get_groq_model()}` (free tier)
 - Ollama mode: `{config.USE_OLLAMA}`
 
-Every demo calls a real model. Keep **USE_SMALL_MODEL=true** in your `.env` for cheap runs.
+Every demo calls a real model. Keep **USE_SMALL_MODEL=true** in your `.env` for cheap runs,
+or set **LLM_PROVIDER=gemini** / **LLM_PROVIDER=groq** to use a free API tier.
 """,
 )
 

@@ -26,9 +26,9 @@ Compare what comes back: validity, shape, and latency.
 )
 
 ui.render_sidebar()
-model_name = config.get_openai_model()
+model_name = config.get_model()
 openai_client = ui.get_openai_client()
-instructor_client = ui.get_instructor("openai")
+instructor_client = ui.get_instructor()
 outlines_model = ui.get_outlines_model()
 
 sample = data.load_invoices(1)[0]
@@ -86,6 +86,7 @@ if st.button("⚔️ Run all three", type="primary"):
                 model=model_name,
                 response_model=models.Invoice,
                 messages=[{"role": "user", "content": f"Extract invoice: {text}"}],
+                max_retries=config.INSTRUCTOR_MAX_RETRIES,
             )
         inst_ok = True
     except Exception as e:  # noqa: BLE001

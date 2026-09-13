@@ -155,11 +155,13 @@ def inject_css() -> None:
 # ---------------------------------------------------------------------------
 @st.cache_resource
 def get_openai_client():
+    """OpenAI-compatible client routed by LLM_PROVIDER (openai/gemini/groq)."""
     return config.get_openai_client()
 
 
 @st.cache_resource
-def get_instructor(provider: str):
+def get_instructor(provider: str | None = None):
+    """Instructor client — defaults to LLM_PROVIDER from .env."""
     return config.get_instructor_client(provider)
 
 
@@ -167,7 +169,9 @@ def get_instructor(provider: str):
 def get_outlines_model():
     import outlines
 
-    return outlines.from_openai(get_openai_client(), config.get_openai_model())
+    if config.LLM_PROVIDER == "openai":
+        return outlines.from_openai(get_openai_client(), config.get_model())
+    return config.get_outlines_model()
 
 
 @st.cache_resource
@@ -197,30 +201,29 @@ def render_sidebar() -> dict:
     )
 
     # --- environment cards ---
-    openai_set = bool(config.OPENAI_API_KEY)
-    anthropic_set = bool(config.ANTHROPIC_API_KEY)
-    sb.markdown(
-        f'<div class="lab-card">'
-        f'<div class="lab-card-label">OpenAI model</div>'
-        f'<div class="lab-card-value">{config.get_openai_model()}</div>'
-        f'<div style="margin-top:8px">'
-        f'<span class="pill {"pill-ok" if openai_set else "pill-bad"}">'
-        f"{'● key connected' if openai_set else '○ key missing'}</span>"
-        f"</div></div>",
-        unsafe_allow_html=True,
-    )
-    sb.markdown(
-        f'<div class="lab-card">'
-        f'<div class="lab-card-label">Anthropic model</div>'
-        f'<div class="lab-card-value">{config.get_anthropic_model()}</div>'
-        f'<div style="margin-top:8px">'
-        f'<span class="pill {"pill-ok" if anthropic_set else "pill-bad"}">'
-        f"{'● key connected' if anthropic_set else '○ key missing'}</span>"
-        f"</div></div>",
-        unsafe_allow_html=True,
-    )
+    _providers = [
+        ("openai", "OpenAI model", config.OPENAI_API_KEY, config.get_openai_model()),
+        ("anthropic", "Anthropic model", config.ANTHROPIC_API_KEY, config.get_anthropic_model()),
+        ("gemini", "Gemini model (free tier)", config.GEMINI_API_KEY, config.get_gemini_model()),
+        ("groq", "Groq model (free tier)", config.GROQ_API_KEY, config.get_groq_model()),
+    ]
+    for key, label, api_key, model in _providers:
+        active = key == config.LLM_PROVIDER
+        pill_class = "pill-ok" if api_key else "pill-bad"
+        pill_text = "● key connected" if api_key else "○ key missing"
+        if active:
+            pill_text += " · active"
+        sb.markdown(
+            f'<div class="lab-card">'
+            f'<div class="lab-card-label">{label}</div>'
+            f'<div class="lab-card-value">{model}</div>'
+            f'<div style="margin-top:8px">'
+            f'<span class="pill {pill_class}">{pill_text}</span>'
+            f"</div></div>",
+            unsafe_allow_html=True,
+        )
 
-    mode_pills = []
+    mode_pills = [f'<span class="pill pill-info">provider · {config.LLM_PROVIDER}</span>']
     if config.USE_OLLAMA:
         mode_pills.append('<span class="pill pill-info">local · Ollama</span>')
     if config.USE_SMALL_MODEL:
@@ -271,4 +274,7 @@ def show_code(title: str, code: str) -> None:
 def api_error(e: Exception) -> None:
     """Friendly error panel so students never hit a raw stack trace."""
     st.error(f"**API call failed:** `{type(e).__name__}: {e}`")
-    st.info("Check your API keys in `.env`, or set USE_OLLAMA=true for local models.")
+    st.info(
+        "Check your API keys in `.env`, set LLM_PROVIDER to a provider with a key "
+        "(gemini and groq have free tiers), or set USE_OLLAMA=true for local models."
+    )

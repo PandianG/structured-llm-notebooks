@@ -27,7 +27,7 @@ and parse it."* Watch what actually comes back.
 
 settings = ui.render_sidebar()
 client = ui.get_openai_client()
-model_name = config.get_openai_model()
+model_name = config.get_model()
 
 # ---------------------------------------------------------------------------
 # Demo A — one-shot raw extraction

@@ -26,7 +26,7 @@ mechanisms.
 )
 
 ui.render_sidebar()
-model_name = config.get_openai_model()
+model_name = config.get_model()
 
 # ---------------------------------------------------------------------------
 # Demo 1 — create_iterable: extract a LIST of objects
@@ -52,7 +52,7 @@ default_people = """Team roster:
 text = st.text_area("Text with several people", value=default_people, height=130)
 
 if st.button("👥 Extract all people", type="primary"):
-    client = ui.get_instructor("openai")
+    client = ui.get_instructor()
     ui.show_code(
         "The exact code that runs",
         """users = client.create_iterable(
@@ -107,7 +107,7 @@ with col_b:
 if st.button("🔍 Run both through Maybe"):
     import instructor
 
-    client = ui.get_instructor("openai")
+    client = ui.get_instructor()
     ui.show_code(
         "The exact code that runs",
         """MaybePerson = instructor.Maybe(Person)   # a function call, not [Person]
@@ -129,6 +129,7 @@ else:
                     model=model_name,
                     messages=[{"role": "user", "content": txt}],
                     response_model=instructor.Maybe(models.Person),
+                    max_retries=config.INSTRUCTOR_MAX_RETRIES,
                 )
                 results[label] = answer
     except Exception as e:  # noqa: BLE001
@@ -162,7 +163,7 @@ ui.explain(
 )
 
 if st.button("🧾 Extract + keep raw completion"):
-    client = ui.get_instructor("openai")
+    client = ui.get_instructor()
     ui.show_code(
         "The exact code that runs",
         """person, completion = client.create_with_completion(
@@ -247,6 +248,7 @@ if st.button("🧪 Run selected modes"):
                     model=model_name,
                     messages=[{"role": "user", "content": "Carol, 35, based in Chicago"}],
                     response_model=models.Person,
+                    max_retries=config.INSTRUCTOR_MAX_RETRIES,
                 )
             results[name] = person
     except Exception as e:  # noqa: BLE001
