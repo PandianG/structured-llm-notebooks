@@ -24,8 +24,8 @@ classifiers = [
 dependencies = [
     # --- Core LLM Libraries ---
     "dspy>=2.6.0",
-    "outlines>=0.1.0",
-    "outlines[llguidance]>=0.1.0",
+    "outlines>=1.3.0",
+    "outlines[llguidance]>=1.3.0",
     "instructor[google-genai]>=1.7.0",
     # --- LLM Provider SDKs ---
     "openai>=1.60.0",
