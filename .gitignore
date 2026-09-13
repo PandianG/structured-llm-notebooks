@@ -88,9 +88,6 @@ logs/
 !data/
 !data/*.jsonl
 
-# DSPy notebooks are kept locally but not published
-notebooks/06_dspy/
-
 # Notebook-generated sample images (regenerated on run)
 sample_invoice.png
 sample_chart.png
