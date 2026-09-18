@@ -91,3 +91,7 @@ logs/
 # Notebook-generated sample images (regenerated on run)
 sample_invoice.png
 sample_chart.png
+
+# Notebook-generated DSPy artifacts (regenerated on run)
+notebooks/06_dspy/optimized_qa.json
+notebooks/06_dspy/training_data.json

@@ -23,7 +23,7 @@ classifiers = [
 
 dependencies = [
     # --- Core LLM Libraries ---
-    "dspy>=2.6.0",
+    "dspy[deno,optuna]>=2.6.0",
     "outlines>=1.3.0",
     "outlines[llguidance]>=1.3.0",
     "instructor[google-genai]>=1.7.0",
