@@ -95,3 +95,6 @@ sample_chart.png
 # Notebook-generated DSPy artifacts (regenerated on run)
 notebooks/06_dspy/optimized_qa.json
 notebooks/06_dspy/training_data.json
+
+# Local theory notes for the DSPy course (not published)
+notebooks/06_dspy/DOCS/
