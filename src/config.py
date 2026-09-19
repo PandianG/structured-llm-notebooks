@@ -30,9 +30,7 @@ OLLAMA_BASE_URL: str = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 VALID_PROVIDERS = ("openai", "anthropic", "gemini", "groq")
 LLM_PROVIDER: str = os.getenv("LLM_PROVIDER", "openai").lower()
 if LLM_PROVIDER not in VALID_PROVIDERS:
-    raise ValueError(
-        f"LLM_PROVIDER must be one of {VALID_PROVIDERS}, got {LLM_PROVIDER!r}"
-    )
+    raise ValueError(f"LLM_PROVIDER must be one of {VALID_PROVIDERS}, got {LLM_PROVIDER!r}")
 
 # OpenAI-compatible base URLs for providers without a dedicated Outlines/DSPy path
 GROQ_BASE_URL: str = os.getenv("GROQ_BASE_URL", "https://api.groq.com/openai/v1")
@@ -151,9 +149,7 @@ def get_dspy_lm(provider: str | None = None):
     if provider == "groq":
         return dspy.LM(f"groq/{get_model('groq')}", api_key=require_api_key("groq"))
     if provider == "anthropic":
-        return dspy.LM(
-            f"anthropic/{get_model('anthropic')}", api_key=require_api_key("anthropic")
-        )
+        return dspy.LM(f"anthropic/{get_model('anthropic')}", api_key=require_api_key("anthropic"))
     return dspy.LM(f"openai/{get_model('openai')}", api_key=require_api_key("openai"))
 
 
@@ -252,9 +248,7 @@ def get_instructor_client(provider: str | None = None):
 
         client = genai.Client(api_key=require_api_key("gemini"))
         return _RetryingInstructor(
-            from_genai(
-                client, mode=Mode.GENAI_STRUCTURED_OUTPUTS, model=get_model("gemini")
-            )
+            from_genai(client, mode=Mode.GENAI_STRUCTURED_OUTPUTS, model=get_model("gemini"))
         )
     if provider == "groq":
         from groq import Groq  # type: ignore[import-not-found]
@@ -293,9 +287,7 @@ def get_outlines_model(provider: str | None = None):
             "llama3.1",
         )
     if provider == "gemini":
-        client = OpenAI(
-            base_url=GEMINI_BASE_URL, api_key=require_api_key("gemini")
-        )
+        client = OpenAI(base_url=GEMINI_BASE_URL, api_key=require_api_key("gemini"))
         return outlines.from_openai(client, get_model("gemini"))
     if provider == "groq":
         client = OpenAI(base_url=GROQ_BASE_URL, api_key=require_api_key("groq"))

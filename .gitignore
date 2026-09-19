@@ -87,6 +87,10 @@ logs/
 # Synthetic datasets are checked in (a global gitignore commonly ignores data/)
 !data/
 !data/*.jsonl
+# Real document/chart samples used by the Outlines vision notebook
+!data/invoice_samples/
+!data/invoice_samples/*.jpg
+!data/invoice_samples/*.png
 
 # Notebook-generated sample images (regenerated on run)
 sample_invoice.png
@@ -98,3 +102,6 @@ notebooks/06_dspy/training_data.json
 
 # Local theory notes for the DSPy course (not published)
 notebooks/06_dspy/DOCS/
+
+docs/diagrams/*
+AGENTS.md

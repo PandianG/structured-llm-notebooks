@@ -77,10 +77,13 @@ structured-llm-notebooks/
 │   ├── rag_contexts.jsonl         # 30 RAG contexts
 │   └── invoices.jsonl             # 20 extraction samples
 │
-└── 🔧 scripts/                    # Setup & deployment helpers
-    ├── ollama_setup.sh            # Pull local models (zero-cost mode)
-    ├── local_finetune.sh          # Local fine-tuning launcher
-    └── runpod_setup.md            # Cloud GPU training guide
+├── 🔧 scripts/                    # Setup & deployment helpers
+│   ├── ollama_setup.sh            # Pull local models (zero-cost mode)
+│   ├── local_finetune.sh          # Local fine-tuning launcher
+│   └── runpod_setup.md            # Cloud GPU training guide
+│
+└── 📐 docs/diagrams/              # Interactive teaching diagrams (Archify)
+    └── index.html                 # Gallery — 16 explorable workflow/architecture diagrams
 ```
 
 ---
@@ -285,6 +288,26 @@ DSPY_OPTIMIZER_TRIALS=10   # Fewer optimization trials
 | 3.4 | [ReAct Agent with Tools](notebooks/06_dspy/04_react_agent.ipynb) | ~45 min |
 | 3.5 | [GEPA Optimizer Deep Dive](notebooks/06_dspy/05_gepa_optimizer.ipynb) | ~90 min |
 | 3.6 | [Finetuning + BetterTogether](notebooks/06_dspy/06_finetuning.ipynb) | ~4 hours |
+
+---
+
+## 📐 Teaching Diagrams
+
+Every module above has a set of **interactive, explorable diagrams** (built with
+[Archify](https://github.com/sourangshupal/.agents/skills/archify)) that walk through the
+architecture and programming flow behind the notebooks — pan/zoom, light/dark theme, and
+animated trace playback on flow diagrams.
+
+**Open the gallery:** [`docs/diagrams/index.html`](docs/diagrams/index.html)
+· live version: https://faint-citrus-xagg.here.now/
+
+| Group | Diagrams |
+|-------|----------|
+| **Repo-wide** | [`repo_architecture`](docs/diagrams/repo_architecture.html) (the `src/config.py` hub) · [`data_flow`](docs/diagrams/data_flow.html) (datasets → metrics) |
+| **🎯 Instructor** | [`patch_flow`](docs/diagrams/instructor_patch_flow.html) · [`retry_loop`](docs/diagrams/instructor_retry_loop.html) · [`streaming_lifecycle`](docs/diagrams/instructor_streaming_lifecycle.html) · [`three_backends`](docs/diagrams/instructor_three_backends.html) |
+| **🔒 Outlines** | [`two_paths`](docs/diagrams/outlines_two_paths.html) · [`fsm_decoding`](docs/diagrams/outlines_fsm_decoding.html) · [`schema_compilation`](docs/diagrams/outlines_schema_compilation.html) · [`production_serving`](docs/diagrams/outlines_production_serving.html) |
+| **🚀 DSPy** | [`compile_loop`](docs/diagrams/dspy_compile_loop.html) · [`gepa_evolution`](docs/diagrams/dspy_gepa_evolution.html) · [`react_loop`](docs/diagrams/dspy_react_loop.html) · [`rag_multihop`](docs/diagrams/dspy_rag_multihop.html) · [`finetuning_pipeline`](docs/diagrams/dspy_finetuning_pipeline.html) |
+| **Capstone** | [`three_philosophies_head_to_head`](docs/diagrams/three_philosophies_head_to_head.html) — one input through all three libraries |
 
 ---
 
