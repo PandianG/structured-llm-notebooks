@@ -159,6 +159,36 @@ NOTEBOOK_ESTIMATES: dict[str, dict[str, Any]] = {
         "tokens_per_call": 2,
         "description": "BetterTogether finetuning",
     },
+    "06_dspy/07_module_catalog.ipynb": {
+        "calls": 40,
+        "tokens_per_call": 2,
+        "description": "DSPy module catalog — all 13 modules",
+    },
+    "06_dspy/08_embeddings.ipynb": {
+        "calls": 4,
+        "tokens_per_call": 1,
+        "description": "Embeddings: hosted + local + custom",
+    },
+    "06_dspy/09_optimizer_catalog.ipynb": {
+        "calls": 90,
+        "tokens_per_call": 2,
+        "description": "Optimizer catalog — all 14 optimizers",
+    },
+    "06_dspy/10_adapters_evaluation.ipynb": {
+        "calls": 25,
+        "tokens_per_call": 2,
+        "description": "Adapters + evaluation metrics",
+    },
+    "06_dspy/11_primitives_tools.ipynb": {
+        "calls": 12,
+        "tokens_per_call": 3,
+        "description": "Primitives + retrieval/code tools",
+    },
+    "06_dspy/12_gepa_deep_dive.ipynb": {
+        "calls": 60,
+        "tokens_per_call": 3,
+        "description": "GEPA complete implementation (deep dive)",
+    },
     # Webinar — From Prompts to Programs
     "00_webinar/Demo_1_Instructor_and_Outlines.ipynb": {
         "calls": 35,

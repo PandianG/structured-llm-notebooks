@@ -10,7 +10,7 @@
 </h1>
 
 <p align="center">
-  <b>3 Libraries · 14 Notebooks · 40+ Features · Production-Ready</b>
+  <b>3 Libraries · 20 Notebooks · 40+ Features · Production-Ready</b>
 </p>
 
 <p align="center">
@@ -59,10 +59,10 @@ structured-llm-notebooks/
 ├── 📖 README.md                   # This file
 ├── 🔑 .env.example                # API keys + cost-control toggles
 │
-├── 📓 notebooks/                  # 14 implementation notebooks
+├── 📓 notebooks/                  # 20 implementation notebooks
 │   ├── 01_instructor/             # 4 notebooks
 │   ├── 02_outlines/               # 4 notebooks
-│   └── 06_dspy/                   # 6 notebooks
+│   └── 06_dspy/                   # 12 notebooks
 │
 ├── 🧰 src/                        # Shared Python utilities
 │   ├── config.py                  # Unified LM config (OpenAI/Anthropic/Gemini/Groq/Ollama)
@@ -288,6 +288,12 @@ DSPY_OPTIMIZER_TRIALS=10   # Fewer optimization trials
 | 3.4 | [ReAct Agent with Tools](notebooks/06_dspy/04_react_agent.ipynb) | ~45 min |
 | 3.5 | [GEPA Optimizer Deep Dive](notebooks/06_dspy/05_gepa_optimizer.ipynb) | ~90 min |
 | 3.6 | [Finetuning + BetterTogether](notebooks/06_dspy/06_finetuning.ipynb) | ~4 hours |
+| 3.7 | [Module Catalog: All 13 Modules](notebooks/06_dspy/07_module_catalog.ipynb) | ~60 min |
+| 3.8 | [Embeddings: Hosted, Local & Custom](notebooks/06_dspy/08_embeddings.ipynb) | ~10 min |
+| 3.9 | [Optimizer Catalog: All 14 Optimizers](notebooks/06_dspy/09_optimizer_catalog.ipynb) | ~25 min |
+| 3.10 | [Adapters & Evaluation](notebooks/06_dspy/10_adapters_evaluation.ipynb) | ~15 min |
+| 3.11 | [Primitives & Tools](notebooks/06_dspy/11_primitives_tools.ipynb) | ~15 min |
+| 3.12 | [GEPA Deep Dive: Complete Implementation](notebooks/06_dspy/12_gepa_deep_dive.ipynb) | ~25 min |
 
 ---
 

@@ -1,0 +1,105 @@
+{
+  "generate.predict": {
+    "traces": [],
+    "train": [],
+    "demos": [
+      {
+        "augmented": true,
+        "question": "What is DSPy?",
+        "reasoning": "DSPy refers to Domain-Specific PyTorch, a library or tool that aids in utilizing PyTorch for specific domain applications, allowing for more tailored deep learning solutions.",
+        "answer": "DSPy is tailored PyTorch for specific domain applications."
+      },
+      {
+        "augmented": true,
+        "question": "What is Fine-tuning?",
+        "reasoning": "Fine-tuning is adjusting a pre-trained model on a specific task using additional labeled data, improving its performance for that particular task by allowing the model to learn task-specific patterns while retaining the general knowledge it previously acquired.",
+        "answer": "Fine-tuning is adapting a pre-trained model to a specific task using additional data."
+      },
+      {
+        "augmented": true,
+        "question": "What is DSPy?",
+        "reasoning": "DSPy refers to Domain-Specific PyTorch, a library or tool that aids in utilizing PyTorch for specific domain applications, allowing for more tailored deep learning solutions.",
+        "answer": "DSPy is tailored PyTorch for specific domain applications."
+      },
+      {
+        "augmented": true,
+        "question": "What is DSPy?",
+        "reasoning": "DSPy refers to Domain-Specific PyTorch, a library or tool that aids in utilizing PyTorch for specific domain applications, allowing for more tailored deep learning solutions.",
+        "answer": "DSPy is tailored PyTorch for specific domain applications."
+      },
+      {
+        "question": "What is Fine-tuning?",
+        "answer": "Fine-tuning adapts a pre-trained model to a specific task."
+      },
+      {
+        "question": "What is DSPy?",
+        "answer": "DSPy is a framework for programming language models."
+      },
+      {
+        "question": "What is Vector DB?",
+        "answer": "Vector databases store embeddings for similarity search."
+      },
+      {
+        "question": "What is Attention?",
+        "answer": "Attention mechanisms let models focus on relevant tokens."
+      },
+      {
+        "question": "What is Prompt Engineering?",
+        "answer": "Prompt engineering is the art of writing effective prompts."
+      },
+      {
+        "question": "What is DSPy?",
+        "answer": "DSPy is a framework for programming language models."
+      },
+      {
+        "question": "What is Fine-tuning?",
+        "answer": "Fine-tuning adapts a pre-trained model to a specific task."
+      },
+      {
+        "question": "What is RAG?",
+        "answer": "Retrieval-Augmented Generation combines search with LLMs."
+      },
+      {
+        "question": "What is Chain-of-Thought?",
+        "answer": "CoT prompting asks the model to show its reasoning."
+      },
+      {
+        "question": "What is Vector DB?",
+        "answer": "Vector databases store embeddings for similarity search."
+      },
+      {
+        "question": "What is Vector DB?",
+        "answer": "Vector databases store embeddings for similarity search."
+      },
+      {
+        "question": "What is Transformers?",
+        "answer": "Transformers are neural networks based on self-attention."
+      }
+    ],
+    "signature": {
+      "instructions": "Answer questions with short factual responses.",
+      "fields": [
+        {
+          "prefix": "Question:",
+          "description": "${question}"
+        },
+        {
+          "prefix": "Reasoning:",
+          "description": "${reasoning}"
+        },
+        {
+          "prefix": "Answer:",
+          "description": "${answer}"
+        }
+      ]
+    },
+    "lm": null
+  },
+  "metadata": {
+    "dependency_versions": {
+      "python": "3.12",
+      "dspy": "3.3.1",
+      "cloudpickle": "3.1"
+    }
+  }
+}

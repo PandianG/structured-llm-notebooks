@@ -49,6 +49,7 @@ dependencies = [
     "trl>=0.13.0",
     "sentencepiece>=0.2.0",
     "protobuf>=5.0.0",
+    "sentence-transformers>=3.0.0",
     # --- Optional: Efficient Fine-tuning ---
     "unsloth>=2025.1.0; platform_machine == 'x86_64'",
     # --- Utilities ---

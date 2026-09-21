@@ -154,6 +154,25 @@ def get_dspy_lm(provider: str | None = None):
 
 
 # ---------------------------------------------------------------------------
+# Embeddings
+# ---------------------------------------------------------------------------
+EMBEDDING_MODEL: str = os.getenv("EMBEDDING_MODEL", "openai/text-embedding-3-small")
+
+
+def get_embedder(model: str | None = None):
+    """Return a dspy.Embedder for the configured embedding model.
+
+    The model string is routed through litellm, so any litellm-supported
+    embedding model works, e.g. "openai/text-embedding-3-small" (default) or
+    "gemini/text-embedding-004". Override with the EMBEDDING_MODEL env var.
+    Hosted models use the corresponding provider's API key from .env.
+    """
+    import dspy  # type: ignore[import-not-found]
+
+    return dspy.Embedder(model or EMBEDDING_MODEL)
+
+
+# ---------------------------------------------------------------------------
 # Instructor
 # ---------------------------------------------------------------------------
 _TRANSIENT_MARKERS = (
